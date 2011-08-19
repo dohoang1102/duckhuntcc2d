@@ -121,7 +121,15 @@
 		3420F56D13FD7D090061214A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F56C13FD7D090061214A /* main.m */; };
 		3420F57013FD7D090061214A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F56F13FD7D090061214A /* AppDelegate.m */; };
 		3420F57313FD7D090061214A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F57213FD7D090061214A /* RootViewController.m */; };
-		3420F57613FD7D090061214A /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F57513FD7D090061214A /* HelloWorldLayer.m */; };
+		3420F58213FD7EE00061214A /* background.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3420F57D13FD7EE00061214A /* background.jpeg */; };
+		3420F58313FD7EE00061214A /* black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3420F57E13FD7EE00061214A /* black-button.png */; };
+		3420F58413FD7EE00061214A /* blue-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3420F57F13FD7EE00061214A /* blue-button.png */; };
+		3420F58513FD7EE00061214A /* duck.png in Resources */ = {isa = PBXBuildFile; fileRef = 3420F58013FD7EE00061214A /* duck.png */; };
+		3420F58613FD7EE00061214A /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3420F58113FD7EE00061214A /* red-button.png */; };
+		3420F58913FD8BAA0061214A /* IntroSlidesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F58813FD8BAA0061214A /* IntroSlidesLayer.m */; };
+		3420F59813FEA2960061214A /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F59713FEA2960061214A /* MenuLayer.m */; };
+		344EA6A113FED19B000517B4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A013FED19B000517B4 /* GameLayer.m */; };
+		344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A513FEDDED000517B4 /* MNDuck.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -357,9 +365,20 @@
 		3420F56F13FD7D090061214A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3420F57113FD7D090061214A /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		3420F57213FD7D090061214A /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		3420F57413FD7D090061214A /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		3420F57513FD7D090061214A /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		3420F57713FD7D090061214A /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
+		3420F57D13FD7EE00061214A /* background.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpeg; sourceTree = "<group>"; };
+		3420F57E13FD7EE00061214A /* black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black-button.png"; sourceTree = "<group>"; };
+		3420F57F13FD7EE00061214A /* blue-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blue-button.png"; sourceTree = "<group>"; };
+		3420F58013FD7EE00061214A /* duck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = duck.png; sourceTree = "<group>"; };
+		3420F58113FD7EE00061214A /* red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "red-button.png"; sourceTree = "<group>"; };
+		3420F58713FD8BAA0061214A /* IntroSlidesLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroSlidesLayer.h; sourceTree = "<group>"; };
+		3420F58813FD8BAA0061214A /* IntroSlidesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroSlidesLayer.m; sourceTree = "<group>"; };
+		3420F59613FEA2960061214A /* MenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLayer.h; sourceTree = "<group>"; };
+		3420F59713FEA2960061214A /* MenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
+		344EA69F13FED19B000517B4 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLayer.h; path = ../GameLayer.h; sourceTree = "<group>"; };
+		344EA6A013FED19B000517B4 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLayer.m; path = ../GameLayer.m; sourceTree = "<group>"; };
+		344EA6A413FEDDED000517B4 /* MNDuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNDuck.h; sourceTree = "<group>"; };
+		344EA6A513FEDDED000517B4 /* MNDuck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNDuck.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,12 +435,12 @@
 		3420F41C13FD7D070061214A /* duckhuntcc2d */ = {
 			isa = PBXGroup;
 			children = (
+				344EA6A313FEDDD3000517B4 /* Objects */,
+				344EA6A213FEDDBA000517B4 /* Scenes */,
 				3420F56E13FD7D090061214A /* AppDelegate.h */,
 				3420F56F13FD7D090061214A /* AppDelegate.m */,
 				3420F57113FD7D090061214A /* RootViewController.h */,
 				3420F57213FD7D090061214A /* RootViewController.m */,
-				3420F57413FD7D090061214A /* HelloWorldLayer.h */,
-				3420F57513FD7D090061214A /* HelloWorldLayer.m */,
 				3420F57713FD7D090061214A /* GameConfig.h */,
 				3420F41D13FD7D070061214A /* Resources */,
 				3420F43113FD7D070061214A /* libs */,
@@ -433,6 +452,11 @@
 		3420F41D13FD7D070061214A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3420F57D13FD7EE00061214A /* background.jpeg */,
+				3420F57E13FD7EE00061214A /* black-button.png */,
+				3420F57F13FD7EE00061214A /* blue-button.png */,
+				3420F58013FD7EE00061214A /* duck.png */,
+				3420F58113FD7EE00061214A /* red-button.png */,
 				3420F41E13FD7D070061214A /* Default.png */,
 				3420F42013FD7D070061214A /* fps_images.png */,
 				3420F42213FD7D070061214A /* Icon-72.png */,
@@ -758,6 +782,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		344EA6A213FEDDBA000517B4 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				344EA69F13FED19B000517B4 /* GameLayer.h */,
+				344EA6A013FED19B000517B4 /* GameLayer.m */,
+				3420F58713FD8BAA0061214A /* IntroSlidesLayer.h */,
+				3420F58813FD8BAA0061214A /* IntroSlidesLayer.m */,
+				3420F59613FEA2960061214A /* MenuLayer.h */,
+				3420F59713FEA2960061214A /* MenuLayer.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		344EA6A313FEDDD3000517B4 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				344EA6A413FEDDED000517B4 /* MNDuck.h */,
+				344EA6A513FEDDED000517B4 /* MNDuck.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -814,6 +860,11 @@
 				3420F42B13FD7D070061214A /* Icon.png in Resources */,
 				3420F42D13FD7D070061214A /* Icon@2x.png in Resources */,
 				3420F43013FD7D070061214A /* iTunesArtwork in Resources */,
+				3420F58213FD7EE00061214A /* background.jpeg in Resources */,
+				3420F58313FD7EE00061214A /* black-button.png in Resources */,
+				3420F58413FD7EE00061214A /* blue-button.png in Resources */,
+				3420F58513FD7EE00061214A /* duck.png in Resources */,
+				3420F58613FD7EE00061214A /* red-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -921,7 +972,10 @@
 				3420F56D13FD7D090061214A /* main.m in Sources */,
 				3420F57013FD7D090061214A /* AppDelegate.m in Sources */,
 				3420F57313FD7D090061214A /* RootViewController.m in Sources */,
-				3420F57613FD7D090061214A /* HelloWorldLayer.m in Sources */,
+				3420F58913FD8BAA0061214A /* IntroSlidesLayer.m in Sources */,
+				3420F59813FEA2960061214A /* MenuLayer.m in Sources */,
+				344EA6A113FED19B000517B4 /* GameLayer.m in Sources */,
+				344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,6 +1069,7 @@
 				3420F57C13FD7D090061214A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
