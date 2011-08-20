@@ -7,7 +7,7 @@
 //
 
 #import "GameLayer.h"
-#import "MNDuck.h"
+#import "ConveyorBelt.h"
 
 
 @implementation GameLayer
@@ -30,15 +30,15 @@
 - (id)init
 {
     if( self = [super init] ) {
+        self.isTouchEnabled = NO;
+        
         background = [CCSprite spriteWithFile:@"background.jpeg"];
         [background setPosition:ccp(240, 160)];
-        [self addChild:background];
+        [self addChild:background z:0];
         
-        MNDuck *firstDuck = [MNDuck newDuck];
-        [firstDuck setScale:0.5];
-        [firstDuck setPosition:ccp(195, 43)];
-        
-        [self addChild:firstDuck];
+        ConveyorBelt *cb = [[ConveyorBelt alloc] init];
+        [self addChild:cb z:1];
+        [cb release];
     }
     
     return self;
@@ -49,4 +49,7 @@
     [super dealloc];
 }
 
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+}
 @end

@@ -130,6 +130,7 @@
 		3420F59813FEA2960061214A /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F59713FEA2960061214A /* MenuLayer.m */; };
 		344EA6A113FED19B000517B4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A013FED19B000517B4 /* GameLayer.m */; };
 		344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A513FEDDED000517B4 /* MNDuck.m */; };
+		344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A813FEECFC000517B4 /* ConveyorBelt.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -379,6 +380,8 @@
 		344EA6A013FED19B000517B4 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLayer.m; path = ../GameLayer.m; sourceTree = "<group>"; };
 		344EA6A413FEDDED000517B4 /* MNDuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNDuck.h; sourceTree = "<group>"; };
 		344EA6A513FEDDED000517B4 /* MNDuck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNDuck.m; sourceTree = "<group>"; };
+		344EA6A713FEECFC000517B4 /* ConveyorBelt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConveyorBelt.h; sourceTree = "<group>"; };
+		344EA6A813FEECFC000517B4 /* ConveyorBelt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConveyorBelt.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -800,6 +803,8 @@
 			children = (
 				344EA6A413FEDDED000517B4 /* MNDuck.h */,
 				344EA6A513FEDDED000517B4 /* MNDuck.m */,
+				344EA6A713FEECFC000517B4 /* ConveyorBelt.h */,
+				344EA6A813FEECFC000517B4 /* ConveyorBelt.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -976,6 +981,7 @@
 				3420F59813FEA2960061214A /* MenuLayer.m in Sources */,
 				344EA6A113FED19B000517B4 /* GameLayer.m in Sources */,
 				344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */,
+				344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

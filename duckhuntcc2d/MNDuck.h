@@ -15,4 +15,13 @@
 
 +(MNDuck *)newDuck;
 
+-(void)setRandomY;
+-(void)setOffscreenRight;
+-(CGFloat)width;
+-(CGFloat)height;
+-(CGFloat)x;
+-(CGFloat)y;
+-(CGRect)rect;
+-(BOOL)containsTouchLocation:(UITouch *)touch;
+
 @end
