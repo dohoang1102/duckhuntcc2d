@@ -25,7 +25,7 @@
         
         rightPond = [[NSMutableArray array] retain];
         onBelt = [[NSMutableArray array] retain];
-        deadDucks = [[NSMutableArray array] retain];
+        deadDucks = 0;
         
         for( int i = 0; i < startingDucks; i++ ) {
             MNDuck *d = [MNDuck newDuck];
@@ -34,8 +34,12 @@
             [self addChild:d];
         }
         
+        duckStats = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)] fontName:@"Helvetica" fontSize:18];
+        [duckStats setPosition:ccp( 400, 310 )];
+        [duckStats setColor:ccc3(0,0,0)];
+        [self addChild:duckStats];
+        
         [self schedule:@selector(sendNextDuck:) interval:1];
-        [self setGameOver:kGAMEOVERLOST];
     }
     return self;
 }
@@ -66,7 +70,7 @@
 
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-//    NSLog(@"TOUCH: %@", touch);
+
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -79,9 +83,11 @@
 {
     if( [keyPath isEqualToString:@"hasBeenShot"] ) {
         [onBelt removeObject:object];
-        [deadDucks addObject:object];
+        deadDucks++;
         
-        if( [deadDucks count]  == (startingDucks - 1) ) {
+        [duckStats setString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)]];
+        
+        if( deadDucks  == (startingDucks) ) {
             [self setGameOver:kGAMEOVERWON];
         }
     }

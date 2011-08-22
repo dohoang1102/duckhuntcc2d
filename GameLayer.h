@@ -14,6 +14,8 @@
     CCSprite *background;
     CCLabelTTF *clock;
     ConveyorBelt *conveyorBeltLayer;
+    
+    int level;
 }
 
 +(CCScene *)scene;
