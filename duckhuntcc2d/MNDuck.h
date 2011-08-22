@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface MNDuck : CCSprite {
+@interface MNDuck : CCSprite<CCTargetedTouchDelegate> {
     
 }
 
@@ -21,7 +21,15 @@
 -(CGFloat)height;
 -(CGFloat)x;
 -(CGFloat)y;
--(CGRect)rect;
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
 -(BOOL)containsTouchLocation:(UITouch *)touch;
+-(void)onEnter;
+-(void)onExit;
+-(CGRect)rect;
+-(CGRect)rectInPixels;
+-(void)shoot;
+
+@property(nonatomic) BOOL hasBeenShot;
 
 @end

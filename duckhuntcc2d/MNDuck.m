@@ -11,12 +11,15 @@
 
 @implementation MNDuck
 
+@synthesize hasBeenShot;
+
 +(MNDuck *)newDuck
 {
     MNDuck *duck = [MNDuck spriteWithFile:@"duck.png"];
     [duck setScale:0.5];
     [duck setRandomY];
     [duck setOffscreenRight];
+    [duck setHasBeenShot:false];
     
     return duck;
 }
@@ -56,16 +59,55 @@
     return self.position.y;
 }
 
-- (CGRect)rect
+- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    CGSize s = [self contentSizeInPixels];
-    return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
+    if( hasBeenShot ) return;
+    [self shoot];
 }
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if ( ![self containsTouchLocation:touch] ) return NO;
+    return YES;
+}
+
+- (void)onEnter
+{
+	[[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+	[super onEnter];
+}
+
+- (void)onExit
+{
+	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
+	[super onExit];
+}	
 
 - (BOOL)containsTouchLocation:(UITouch *)touch
 {
-    NSLog(@"%@", [self convertTouchToNodeSpace:touch]);
-    return CGRectContainsPoint(self.rect, [self convertTouchToNodeSpace:touch]);
+	CGPoint p = [self convertTouchToNodeSpaceAR:touch];
+	CGRect r = [self rectInPixels];
+	return CGRectContainsPoint(r, p);
 }
+
+- (CGRect)rectInPixels
+{
+	CGSize s = [texture_ contentSizeInPixels];
+	return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
+}
+
+- (CGRect)rect
+{
+	CGSize s = [texture_ contentSize];
+	return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
+}
+
+- (void)shoot
+{
+    [self setHasBeenShot:YES];
+    [self stopAllActions];
+    [self runAction:[CCMoveTo actionWithDuration:0.2 position:ccp([self x], -100)]];
+}
+
 
 @end

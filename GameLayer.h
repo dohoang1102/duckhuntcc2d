@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "ConveyorBelt.h"
 
 @interface GameLayer : CCLayer {
     CCSprite *background;
+    CCLabelTTF *clock;
+    ConveyorBelt *conveyorBeltLayer;
 }
 
 +(CCScene *)scene;
+-(void)gameOver:(BOOL)status;
+
+@property int clockValue;
 
 @end

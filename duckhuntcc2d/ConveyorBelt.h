@@ -13,9 +13,16 @@
 @interface ConveyorBelt : CCLayer {
     NSMutableArray *onBelt;
     NSMutableArray *rightPond;
+    NSMutableArray *deadDucks;
+    int startingDucks;
 }
 
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
 - (void)returnDuck:(id)sender;
+- (void)onEnter;
+- (void)onExit;
+
+@property(nonatomic) BOOL gameOver;
 
 @end
