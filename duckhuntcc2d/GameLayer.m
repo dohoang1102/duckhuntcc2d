@@ -80,14 +80,8 @@
         [clock setColor:ccc3(255, 140, 0)];
     else if( self.clockValue == 10 )
         [clock setColor:ccc3(255,0,0)];
-    
-    if ( self.clockValue <= 0 )
+    else if ( self.clockValue <= 0 )
         [self gameOver:kGAMEOVERLOST];
-}
-
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    CCScene* menuScene = [MenuLayer scene];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1 scene:menuScene]];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -95,7 +89,14 @@
     return YES;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    CCScene* menuScene = [MenuLayer scene];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1 scene:menuScene]];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath 
+                      ofObject:(id)object change:(NSDictionary *)change 
+                       context:(void *)context
 {
     if( [keyPath isEqualToString:@"gameOver"] ) {
         [self gameOver:(BOOL)[object valueForKey:keyPath]];
@@ -123,6 +124,7 @@
     [self addChild:label z:10];
     
     [label runAction:[CCFadeIn actionWithDuration:1.0]];
+    [conveyorBeltLayer runAction:[CCFadeOut actionWithDuration:2]];
     [self removeChild:conveyorBeltLayer cleanup:NO];
 }
 

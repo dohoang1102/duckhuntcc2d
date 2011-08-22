@@ -15,21 +15,25 @@
 
 +(MNDuck *)newDuck;
 
--(void)setRandomY;
 -(void)setOffscreenRight;
+-(void)setRandomY;
+
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
+
+-(CGRect)rect;
+-(CGRect)rectInPixels;
+-(BOOL)containsTouchLocation:(UITouch *)touch;
+-(void)onEnter;
+-(void)onExit;
+
+-(void)shoot;
+-(void)quack;
+
 -(CGFloat)width;
 -(CGFloat)height;
 -(CGFloat)x;
 -(CGFloat)y;
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
--(BOOL)containsTouchLocation:(UITouch *)touch;
--(void)onEnter;
--(void)onExit;
--(CGRect)rect;
--(CGRect)rectInPixels;
--(void)shoot;
--(void)quack;
 
 @property(nonatomic) BOOL hasBeenShot;
 

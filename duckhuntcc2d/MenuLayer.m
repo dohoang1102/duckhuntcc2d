@@ -7,7 +7,7 @@
 //
 
 #import "MenuLayer.h"
-#import "GameLayer.h";
+#import "GameLayer.h"
 
 
 @implementation MenuLayer
