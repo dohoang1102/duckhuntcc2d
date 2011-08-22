@@ -20,6 +20,8 @@
 
 +(CCScene *)scene;
 -(void)gameOver:(BOOL)status;
+-(void)resetAndIncrementLevel;
+-(void)loadSoundFilesInBackground;
 
 @property int clockValue;
 

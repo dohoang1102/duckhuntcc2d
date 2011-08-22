@@ -29,6 +29,7 @@
 -(CGRect)rect;
 -(CGRect)rectInPixels;
 -(void)shoot;
+-(void)quack;
 
 @property(nonatomic) BOOL hasBeenShot;
 

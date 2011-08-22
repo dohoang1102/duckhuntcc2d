@@ -7,7 +7,9 @@
 //
 
 #import "MNDuck.h"
-
+#import "SimpleAudioEngine.h"
+#import "CDAudioManager.h"
+#import "CocosDenshion.h"
 
 @implementation MNDuck
 
@@ -109,5 +111,9 @@
     [self runAction:[CCMoveTo actionWithDuration:0.2 position:ccp([self x], -100)]];
 }
 
+- (void)quack
+{
+    [[SimpleAudioEngine sharedEngine] playEffect:@"quack.wav"];
+}
 
 @end

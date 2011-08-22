@@ -128,6 +128,9 @@
 		3420F58613FD7EE00061214A /* red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3420F58113FD7EE00061214A /* red-button.png */; };
 		3420F58913FD8BAA0061214A /* IntroSlidesLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F58813FD8BAA0061214A /* IntroSlidesLayer.m */; };
 		3420F59813FEA2960061214A /* MenuLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3420F59713FEA2960061214A /* MenuLayer.m */; };
+		343C99761402E787000347EA /* quack.wav in Resources */ = {isa = PBXBuildFile; fileRef = 343C99751402E787000347EA /* quack.wav */; };
+		343C99781402EA2E000347EA /* bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = 343C99771402EA2E000347EA /* bell.wav */; };
+		343C997A1402EA9B000347EA /* buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = 343C99791402EA9B000347EA /* buzz.wav */; };
 		344EA6A113FED19B000517B4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A013FED19B000517B4 /* GameLayer.m */; };
 		344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A513FEDDED000517B4 /* MNDuck.m */; };
 		344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A813FEECFC000517B4 /* ConveyorBelt.m */; };
@@ -376,6 +379,9 @@
 		3420F58813FD8BAA0061214A /* IntroSlidesLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroSlidesLayer.m; sourceTree = "<group>"; };
 		3420F59613FEA2960061214A /* MenuLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuLayer.h; sourceTree = "<group>"; };
 		3420F59713FEA2960061214A /* MenuLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuLayer.m; sourceTree = "<group>"; };
+		343C99751402E787000347EA /* quack.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = quack.wav; sourceTree = "<group>"; };
+		343C99771402EA2E000347EA /* bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell.wav; sourceTree = "<group>"; };
+		343C99791402EA9B000347EA /* buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buzz.wav; sourceTree = "<group>"; };
 		344EA69F13FED19B000517B4 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLayer.h; path = ../GameLayer.h; sourceTree = "<group>"; };
 		344EA6A013FED19B000517B4 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLayer.m; path = ../GameLayer.m; sourceTree = "<group>"; };
 		344EA6A413FEDDED000517B4 /* MNDuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNDuck.h; sourceTree = "<group>"; };
@@ -455,6 +461,9 @@
 		3420F41D13FD7D070061214A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				343C99791402EA9B000347EA /* buzz.wav */,
+				343C99771402EA2E000347EA /* bell.wav */,
+				343C99751402E787000347EA /* quack.wav */,
 				3420F57D13FD7EE00061214A /* background.jpeg */,
 				3420F57E13FD7EE00061214A /* black-button.png */,
 				3420F57F13FD7EE00061214A /* blue-button.png */,
@@ -870,6 +879,9 @@
 				3420F58413FD7EE00061214A /* blue-button.png in Resources */,
 				3420F58513FD7EE00061214A /* duck.png in Resources */,
 				3420F58613FD7EE00061214A /* red-button.png in Resources */,
+				343C99761402E787000347EA /* quack.wav in Resources */,
+				343C99781402EA2E000347EA /* bell.wav in Resources */,
+				343C997A1402EA9B000347EA /* buzz.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1034,6 +1046,7 @@
 				GCC_PREFIX_HEADER = duckhuntcc2d/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1049,6 +1062,7 @@
 				GCC_PREFIX_HEADER = duckhuntcc2d/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

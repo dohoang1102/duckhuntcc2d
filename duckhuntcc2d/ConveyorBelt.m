@@ -7,6 +7,9 @@
 //
 
 #import "ConveyorBelt.h"
+#import "SimpleAudioEngine.h"
+#import "CDAudioManager.h"
+#import "CocosDenshion.h"
 
 #define kGAMEOVERLOST NO
 #define kGAMEOVERWON YES
@@ -26,13 +29,8 @@
         rightPond = [[NSMutableArray array] retain];
         onBelt = [[NSMutableArray array] retain];
         deadDucks = 0;
-        
-        for( int i = 0; i < startingDucks; i++ ) {
-            MNDuck *d = [MNDuck newDuck];
-            [rightPond addObject:d];
-            [d addObserver:self forKeyPath:@"hasBeenShot" options:NSKeyValueChangeSetting context:nil];
-            [self addChild:d];
-        }
+
+        [self initializeDucks];
         
         duckStats = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)] fontName:@"Helvetica" fontSize:18];
         [duckStats setPosition:ccp( 400, 310 )];
@@ -41,7 +39,24 @@
         
         [self schedule:@selector(sendNextDuck:) interval:1];
     }
+    
     return self;
+}
+
+- (void)initializeDucks
+{
+    for( int i = 0; i < startingDucks; i++ ) {
+        MNDuck *duck = [MNDuck newDuck];
+        [rightPond addObject:duck];
+        [duck addObserver:self forKeyPath:@"hasBeenShot" options:NSKeyValueChangeSetting context:nil];
+        [self addChild:duck];
+    }
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    // pass on every touch
+	return YES;
 }
 
 - (void)sendNextDuck:(ccTime)dt
@@ -55,9 +70,32 @@
         [onBelt addObject:nextDuck];
         
         [rightPond removeObject:nextDuck];
-        [nextDuck runAction:[CCSequence actions:
-                             [CCMoveTo actionWithDuration:5 position:ccp( 0 - nextDuck.width, nextDuck.y )],
-                             [CCCallFuncN actionWithTarget:self selector:@selector(returnDuck:)], nil]];
+        
+        [nextDuck runAction:
+         [CCSequence actions:
+          [CCMoveTo actionWithDuration:5 position:ccp( 0 - nextDuck.width, nextDuck.y )],
+          [CCCallFuncN actionWithTarget:self selector:@selector(returnDuck:)],
+          nil]
+        ];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if( [keyPath isEqualToString:@"hasBeenShot"] ) {
+        deadDucks++;
+        
+        // get rid of duck
+        [object quack];
+        [onBelt removeObject:object];
+        [object removeObserver:self forKeyPath:@"hasBeenShot"];
+        [object release];
+        
+        [duckStats setString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)]];
+        
+        if( deadDucks  == (startingDucks) ) {
+            [self setGameOver:kGAMEOVERWON];
+        }
     }
 }
 
@@ -68,29 +106,13 @@
     [rightPond addObject:sender];
 }
 
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+- (void)resetWithLevel:(int)level
 {
-
-}
-
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    // pass on every touch
-	return YES;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if( [keyPath isEqualToString:@"hasBeenShot"] ) {
-        [onBelt removeObject:object];
-        deadDucks++;
-        
-        [duckStats setString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)]];
-        
-        if( deadDucks  == (startingDucks) ) {
-            [self setGameOver:kGAMEOVERWON];
-        }
-    }
+    [rightPond removeAllObjects];
+    [onBelt removeAllObjects];
+    startingDucks *= level;
+    
+    [self initializeDucks];
 }
 
 - (void)onEnter
@@ -103,7 +125,7 @@
 {
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[super onExit];
-}	
+}
 
 - (void)dealloc
 {

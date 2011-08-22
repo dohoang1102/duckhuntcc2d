@@ -7,7 +7,12 @@
 //
 
 #import "GameLayer.h"
+#import "MenuLayer.h"
 #import "ConveyorBelt.h"
+
+#import "SimpleAudioEngine.h"
+#import "CDAudioManager.h"
+#import "CocosDenshion.h"
 
 #define kGAMEOVERLOST NO
 #define kGAMEOVERWON YES
@@ -36,6 +41,7 @@
 {
     if( self = [super init] ) {
         self.isTouchEnabled = YES;
+        level = 1;
         [self setClockValue:16];
         
         background = [CCSprite spriteWithFile:@"background.jpeg"];
@@ -52,10 +58,17 @@
         [self addChild:conveyorBeltLayer z:1];
         [conveyorBeltLayer addObserver:self forKeyPath:@"gameOver" options:NSKeyValueChangeSetting context:nil];
         
+        [self performSelectorInBackground:@selector(loadSoundFilesInBackground) withObject:nil];
         [self schedule:@selector(tick:) interval:1];
     }
     
     return self;
+}
+
+- (void)resetAndIncrementLevel
+{
+    level++;
+    [conveyorBeltLayer resetWithLevel:level];
 }
 
 - (void)tick:(ccTime)dt
@@ -73,13 +86,19 @@
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"Touch Layer");
+    CCScene* menuScene = [MenuLayer scene];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1 scene:menuScene]];
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    return YES;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if( [keyPath isEqualToString:@"gameOver"] ) {
-        [self gameOver:[object valueForKey:keyPath]];
+        [self gameOver:(BOOL)[object valueForKey:keyPath]];
     }
 }
 
@@ -96,13 +115,26 @@
     
     // set up "Game Over" label + fade-in
     NSString *msg = status ? @"Game Over :) You Win!" : @"Game Over :( You Lose";
+    [[SimpleAudioEngine sharedEngine] playEffect: status ? @"bell.wav" : @"buzz.wav" ];
     
     CCLabelTTF *label = [CCLabelTTF labelWithString:msg fontName:@"Futura-Medium" fontSize:20];
     [label setPosition:ccp( winSize.width / 2, winSize.height / 2)];
     [label setOpacity:0];
-    [self addChild:label];
+    [self addChild:label z:10];
     
     [label runAction:[CCFadeIn actionWithDuration:1.0]];
+    [self removeChild:conveyorBeltLayer cleanup:NO];
+}
+
+-(void)loadSoundFilesInBackground
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+     
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"quack.wav"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"bell.wav"];
+    [[SimpleAudioEngine sharedEngine] preloadEffect:@"buzz.wav"];
+    
+    [pool release];
 }
 
 - (void)dealloc

@@ -13,13 +13,16 @@
 @interface ConveyorBelt : CCLayer {
     NSMutableArray *onBelt;
     NSMutableArray *rightPond;
+    CCLabelTTF *duckStats;
+    
     int deadDucks;
     int startingDucks;
-    CCLabelTTF *duckStats;
 }
 
+- (void)initializeDucks;
+- (void)resetWithLevel:(int)level;
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
-- (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 - (void)returnDuck:(id)sender;
 - (void)onEnter;
 - (void)onExit;
