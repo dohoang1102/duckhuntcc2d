@@ -131,7 +131,7 @@
 		343C99761402E787000347EA /* quack.wav in Resources */ = {isa = PBXBuildFile; fileRef = 343C99751402E787000347EA /* quack.wav */; };
 		343C99781402EA2E000347EA /* bell.wav in Resources */ = {isa = PBXBuildFile; fileRef = 343C99771402EA2E000347EA /* bell.wav */; };
 		343C997A1402EA9B000347EA /* buzz.wav in Resources */ = {isa = PBXBuildFile; fileRef = 343C99791402EA9B000347EA /* buzz.wav */; };
-		344EA6A113FED19B000517B4 /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A013FED19B000517B4 /* GameLayer.m */; };
+		343C997D1402F688000347EA /* GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 343C997C1402F688000347EA /* GameLayer.m */; };
 		344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A513FEDDED000517B4 /* MNDuck.m */; };
 		344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A813FEECFC000517B4 /* ConveyorBelt.m */; };
 /* End PBXBuildFile section */
@@ -382,8 +382,8 @@
 		343C99751402E787000347EA /* quack.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = quack.wav; sourceTree = "<group>"; };
 		343C99771402EA2E000347EA /* bell.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bell.wav; sourceTree = "<group>"; };
 		343C99791402EA9B000347EA /* buzz.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = buzz.wav; sourceTree = "<group>"; };
-		344EA69F13FED19B000517B4 /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLayer.h; path = ../GameLayer.h; sourceTree = "<group>"; };
-		344EA6A013FED19B000517B4 /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameLayer.m; path = ../GameLayer.m; sourceTree = "<group>"; };
+		343C997B1402F688000347EA /* GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLayer.h; sourceTree = "<group>"; };
+		343C997C1402F688000347EA /* GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameLayer.m; sourceTree = "<group>"; };
 		344EA6A413FEDDED000517B4 /* MNDuck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNDuck.h; sourceTree = "<group>"; };
 		344EA6A513FEDDED000517B4 /* MNDuck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNDuck.m; sourceTree = "<group>"; };
 		344EA6A713FEECFC000517B4 /* ConveyorBelt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConveyorBelt.h; sourceTree = "<group>"; };
@@ -797,8 +797,8 @@
 		344EA6A213FEDDBA000517B4 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				344EA69F13FED19B000517B4 /* GameLayer.h */,
-				344EA6A013FED19B000517B4 /* GameLayer.m */,
+				343C997B1402F688000347EA /* GameLayer.h */,
+				343C997C1402F688000347EA /* GameLayer.m */,
 				3420F58713FD8BAA0061214A /* IntroSlidesLayer.h */,
 				3420F58813FD8BAA0061214A /* IntroSlidesLayer.m */,
 				3420F59613FEA2960061214A /* MenuLayer.h */,
@@ -991,9 +991,9 @@
 				3420F57313FD7D090061214A /* RootViewController.m in Sources */,
 				3420F58913FD8BAA0061214A /* IntroSlidesLayer.m in Sources */,
 				3420F59813FEA2960061214A /* MenuLayer.m in Sources */,
-				344EA6A113FED19B000517B4 /* GameLayer.m in Sources */,
 				344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */,
 				344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */,
+				343C997D1402F688000347EA /* GameLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
