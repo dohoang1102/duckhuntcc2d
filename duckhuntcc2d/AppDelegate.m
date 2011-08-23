@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "GameConfig.h"
 #import "IntroSlidesLayer.h"
+#import "MenuLayer.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
@@ -110,7 +111,7 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [IntroSlidesLayer scene]];
+	[[CCDirector sharedDirector] runWithScene:[IntroSlidesLayer scene]];
 }
 
 
@@ -127,6 +128,7 @@
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
+    [[CCDirector sharedDirector] replaceScene:[MenuLayer scene]];
 	[[CCDirector sharedDirector] stopAnimation];
 }
 

@@ -14,9 +14,7 @@
     NSMutableArray *onBelt;
     NSMutableArray *rightPond;
     CCLabelTTF *duckStats;
-    
-    int deadDucks;
-    int startingDucks;
+    CGSize winSize;
 }
 
 - (void)initializeDucks;
@@ -24,9 +22,16 @@
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
 - (void)returnDuck:(id)sender;
+- (void)setOpacity: (GLubyte) opacity;
+- (void)start;
+- (void)pause;
 - (void)onEnter;
 - (void)onExit;
 
-@property(nonatomic) BOOL gameOver;
+@property(nonatomic) BOOL   gameOver;
+@property(nonatomic) int    deadDucks;
+@property(nonatomic) int    startingDucks;
+@property(nonatomic) int    beltSpeed;
+@property(nonatomic) float  beltInterval;
 
 @end

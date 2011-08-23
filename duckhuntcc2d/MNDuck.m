@@ -106,6 +106,7 @@
 
 - (void)shoot
 {
+    [self quack];
     [self setHasBeenShot:YES];
     [self stopAllActions];
     [self runAction:[CCMoveTo actionWithDuration:0.2 position:ccp([self x], -100)]];

@@ -7,8 +7,8 @@
 //
 
 #import "MenuLayer.h"
+#import "HowToPlayLayer.h"
 #import "GameLayer.h"
-
 
 @implementation MenuLayer
 
@@ -30,13 +30,28 @@
 -(id)init
 {
     if( self = [super init] ) {
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+
         CCMenuItemImage *startGame = [CCMenuItemImage itemFromNormalImage:@"red-button.png" selectedImage:@"blue-button.png" target:self selector:@selector(startGameTapped:)];
+        CCMenuItemImage *howToPlay = [CCMenuItemImage itemFromNormalImage:@"red-button.png" selectedImage:@"blue-button.png" target:self selector:@selector(howToPlayTapped:)];
+        
         CCLabelTTF *lbl = [CCLabelTTF labelWithString:@"Start Game" fontName:@"Futura-Medium" fontSize:20.0];
-    
-        lbl.position = ccp( 195.0f, 43.0f );
+        CCLabelTTF *htp = [CCLabelTTF labelWithString:@"How To Play" fontName:@"Futura-Medium" fontSize:20.0];
+        
+        [lbl setPosition:ccp( startGame.contentSize.width / 2, startGame.contentSize.height / 2 )];
         [startGame addChild:lbl];
         
-        CCMenu *gameMenu = [CCMenu menuWithItems:startGame, nil];
+        [htp setPosition:ccp( howToPlay.contentSize.width / 2, howToPlay.contentSize.height / 2 )];
+        [howToPlay addChild:htp];
+        
+        int x = winSize.width / 2;
+        int y = winSize.height / 3;
+        
+        [startGame setPosition:ccp( x, 2*y )];
+        [howToPlay setPosition:ccp( x, y )];
+        
+        CCMenu *gameMenu = [CCMenu menuWithItems:startGame, howToPlay, nil];
+        [gameMenu setPosition:CGPointZero];
         
         [self addChild:gameMenu];
     }
@@ -47,6 +62,13 @@
 {
     CCScene *gameScene = [GameLayer scene];
     CCTransitionZoomFlipAngular *transition = [CCTransitionZoomFlipAngular transitionWithDuration:0.5 scene:gameScene];
+    [[CCDirector sharedDirector] replaceScene:transition];
+}
+
+-(void)howToPlayTapped:(id)sender
+{
+    CCScene *howToPlay = [HowToPlayLayer scene];
+    CCTransitionFade *transition = [CCTransitionFade transitionWithDuration:1 scene:howToPlay];
     [[CCDirector sharedDirector] replaceScene:transition];
 }
 

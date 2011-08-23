@@ -14,6 +14,8 @@
     CCSprite *_background;
 }
 
++ (CCScene *)scene;
+
 - (void)tick:(ccTime *)dt;
 - (void)flipSlide:(CCSprite *)sprite;
 - (void)nextScene;

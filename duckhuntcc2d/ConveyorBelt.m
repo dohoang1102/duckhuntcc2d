@@ -17,6 +17,10 @@
 @implementation ConveyorBelt
 
 @synthesize gameOver;
+@synthesize deadDucks;
+@synthesize startingDucks;
+@synthesize beltSpeed;
+@synthesize beltInterval;
 
 - (id)init
 {
@@ -24,23 +28,27 @@
         
         self.isTouchEnabled = YES;
         [self setGameOver:NO];
-        startingDucks = 8;
         
         rightPond = [[NSMutableArray array] retain];
         onBelt = [[NSMutableArray array] retain];
-        deadDucks = 0;
-
-        [self initializeDucks];
         
-        duckStats = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)] fontName:@"Helvetica" fontSize:18];
-        [duckStats setPosition:ccp( 400, 310 )];
-        [duckStats setColor:ccc3(0,0,0)];
-        [self addChild:duckStats];
-        
-        [self schedule:@selector(sendNextDuck:) interval:1];
+        [self setBeltSpeed:5];
+        [self setBeltInterval:1];
     }
     
     return self;
+}
+
+- (void)start
+{
+    winSize = [[CCDirector sharedDirector] winSize];
+    [self initializeDucks];
+    [self schedule:@selector(sendNextDuck:) interval:[self beltInterval]];
+}
+
+- (void)pause
+{
+    [self pauseSchedulerAndActions];
 }
 
 - (void)initializeDucks
@@ -51,6 +59,7 @@
         [duck addObserver:self forKeyPath:@"hasBeenShot" options:NSKeyValueChangeSetting context:nil];
         [self addChild:duck];
     }
+    [self setDeadDucks:0];
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
@@ -61,10 +70,9 @@
 
 - (void)sendNextDuck:(ccTime)dt
 {
-    NSLog(@"%d", [rightPond count]);
-    
     if( [rightPond count] > 0 ) {
         NSUInteger randomIndex = arc4random() % [rightPond count];
+        NSUInteger randomY = (arc4random() % (int)( winSize.height ) );
         
         MNDuck *nextDuck = [rightPond objectAtIndex:randomIndex];
         [onBelt addObject:nextDuck];
@@ -73,7 +81,7 @@
         
         [nextDuck runAction:
          [CCSequence actions:
-          [CCMoveTo actionWithDuration:5 position:ccp( 0 - nextDuck.width, nextDuck.y )],
+          [CCMoveTo actionWithDuration:[self beltSpeed] position:ccp( 0 - nextDuck.width, randomY )],
           [CCCallFuncN actionWithTarget:self selector:@selector(returnDuck:)],
           nil]
         ];
@@ -83,13 +91,11 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if( [keyPath isEqualToString:@"hasBeenShot"] ) {
-        deadDucks++;
+        [self setDeadDucks:[self deadDucks] + 1];
         
         // get rid of duck
-        [object quack];
         [onBelt removeObject:object];
         [object removeObserver:self forKeyPath:@"hasBeenShot"];
-        [object release];
         
         [duckStats setString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)]];
         
@@ -125,6 +131,18 @@
 {
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[super onExit];
+}
+
+// Set the opacity of all of our children that support it
+-(void) setOpacity: (GLubyte) opacity
+{
+    for( CCNode *node in [self children] )
+    {
+        if( [node conformsToProtocol:@protocol( CCRGBAProtocol)] )
+        {
+            [(id<CCRGBAProtocol>) node setOpacity: opacity];
+        }
+    }
 }
 
 - (void)dealloc

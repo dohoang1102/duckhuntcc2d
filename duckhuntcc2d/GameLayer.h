@@ -13,6 +13,7 @@
 @interface GameLayer : CCLayer {
     CCSprite *background;
     CCLabelTTF *clock;
+    CCLabelTTF *duckStats;
     ConveyorBelt *conveyorBeltLayer;
     
     int level;
@@ -22,6 +23,8 @@
 -(void)gameOver:(BOOL)status;
 -(void)resetAndIncrementLevel;
 -(void)loadSoundFilesInBackground;
+-(void)removeConveyorBeltObject;
+-(void)updateDuckStats:(id)object withKeyPath:(NSString *)keyPath;
 
 @property int clockValue;
 
