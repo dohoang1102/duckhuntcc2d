@@ -11,7 +11,7 @@
 
 @implementation IntroSlidesLayer
 
-#pramga mark Class
+#pragma mark Class
 
 +(CCScene *) scene
 {
