@@ -37,12 +37,12 @@
         CGPoint position =  ccp( size.width /2 , size.height/2 );
         
         CCSprite *back1 = [CCSprite node];
-        CCLabelTTF *lbl = [CCLabelTTF labelWithString:@"My First Game" fontName:@"AmericanTypewriter" fontSize:25.0f];
+        CCLabelTTF *lbl = [CCLabelTTF labelWithString: NSLocalizedString(@"My First Game", @"Game Title Display  ") fontName:@"AmericanTypewriter" fontSize:25.0f];
         lbl.position = position;
         [back1 addChild:lbl];
         
         CCSprite *back2 = [CCSprite node];
-        lbl = [CCLabelTTF labelWithString:@"By Matthew Nunes" fontName:@"AmericanTypewriter" fontSize:20.0f];
+        lbl = [CCLabelTTF labelWithString:NSLocalizedString(@"By Matthew Nunes", @"Author Name") fontName:@"AmericanTypewriter" fontSize:20.0f];
         lbl.position = position;
         [back2 addChild:lbl];
         

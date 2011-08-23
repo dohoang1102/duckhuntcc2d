@@ -132,7 +132,9 @@
     [conveyorBeltLayer pause];
     
     // set up "Game Over" label + fade-in
-    NSString *msg = status ? @"Game Over :) You Win!" : @"Game Over :( You Lose";
+    NSString *msg = status ? 
+        NSLocalizedString(@"Game Over :) You Win!", @"Game Over - You Win Message") :
+        NSLocalizedString(@"Game Over :( You Lose", @"Game Over - You Lost Message");
     [[SimpleAudioEngine sharedEngine] playEffect: status ? @"bell.wav" : @"buzz.wav" ];
     
     CCLabelTTF *label = [CCLabelTTF labelWithString:msg fontName:@"Futura-Medium" fontSize:20];
@@ -148,7 +150,7 @@
 
 -(void)updateDuckStats:(id)object withKeyPath:(NSString *)keyPath
 {
-    [duckStats setString:[NSString stringWithFormat:@"%d dead %d alive",
+    [duckStats setString:[NSString stringWithFormat: NSLocalizedString(@"%d dead %d alive", @"Duck Statistics Format String"),
                          [conveyorBeltLayer deadDucks],
                           ([conveyorBeltLayer startingDucks] - [conveyorBeltLayer deadDucks])]];
 }

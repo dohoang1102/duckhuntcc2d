@@ -135,6 +135,8 @@
 		3441594C140338E000A095CA /* HowToPlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3441594B140338E000A095CA /* HowToPlayLayer.m */; };
 		344EA6A613FEDDED000517B4 /* MNDuck.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A513FEDDED000517B4 /* MNDuck.m */; };
 		344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A813FEECFC000517B4 /* ConveyorBelt.m */; };
+		3488DA301403DB6A0062FCE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3488DA2E1403DB6A0062FCE9 /* Localizable.strings */; };
+		3488DA3D1403E9010062FCE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3488DA3B1403E9010062FCE9 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -391,6 +393,8 @@
 		344EA6A513FEDDED000517B4 /* MNDuck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNDuck.m; sourceTree = "<group>"; };
 		344EA6A713FEECFC000517B4 /* ConveyorBelt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConveyorBelt.h; sourceTree = "<group>"; };
 		344EA6A813FEECFC000517B4 /* ConveyorBelt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConveyorBelt.m; sourceTree = "<group>"; };
+		3488DA2F1403DB6A0062FCE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		3488DA3C1403E9010062FCE9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,6 +451,8 @@
 		3420F41C13FD7D070061214A /* duckhuntcc2d */ = {
 			isa = PBXGroup;
 			children = (
+				3488DA3A1403E9010062FCE9 /* fr.lproj */,
+				3488DA2D1403DA9C0062FCE9 /* en.lproj */,
 				344EA6A313FEDDD3000517B4 /* Objects */,
 				344EA6A213FEDDBA000517B4 /* Scenes */,
 				3420F56E13FD7D090061214A /* AppDelegate.h */,
@@ -823,6 +829,22 @@
 			name = Objects;
 			sourceTree = "<group>";
 		};
+		3488DA2D1403DA9C0062FCE9 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3488DA2E1403DB6A0062FCE9 /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		3488DA3A1403E9010062FCE9 /* fr.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				3488DA3B1403E9010062FCE9 /* Localizable.strings */,
+			);
+			path = fr.lproj;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -854,6 +876,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				fr,
 			);
 			mainGroup = 3420F3FD13FD7D060061214A;
 			productRefGroup = 3420F40913FD7D070061214A /* Products */;
@@ -887,6 +910,8 @@
 				343C99761402E787000347EA /* quack.wav in Resources */,
 				343C99781402EA2E000347EA /* bell.wav in Resources */,
 				343C997A1402EA9B000347EA /* buzz.wav in Resources */,
+				3488DA301403DB6A0062FCE9 /* Localizable.strings in Resources */,
+				3488DA3D1403E9010062FCE9 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,6 +1030,25 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		3488DA2E1403DB6A0062FCE9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3488DA2F1403DB6A0062FCE9 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		3488DA3B1403E9010062FCE9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3488DA3C1403E9010062FCE9 /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		3420F57813FD7D090061214A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1052,7 +1096,7 @@
 				GCC_PREFIX_HEADER = duckhuntcc2d/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -1068,7 +1112,7 @@
 				GCC_PREFIX_HEADER = duckhuntcc2d/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

@@ -35,8 +35,8 @@
         CCMenuItemImage *startGame = [CCMenuItemImage itemFromNormalImage:@"red-button.png" selectedImage:@"blue-button.png" target:self selector:@selector(startGameTapped:)];
         CCMenuItemImage *howToPlay = [CCMenuItemImage itemFromNormalImage:@"red-button.png" selectedImage:@"blue-button.png" target:self selector:@selector(howToPlayTapped:)];
         
-        CCLabelTTF *lbl = [CCLabelTTF labelWithString:@"Start Game" fontName:@"Futura-Medium" fontSize:20.0];
-        CCLabelTTF *htp = [CCLabelTTF labelWithString:@"How To Play" fontName:@"Futura-Medium" fontSize:20.0];
+        CCLabelTTF *lbl = [CCLabelTTF labelWithString:NSLocalizedString(@"Start Game", @"Start Game menu button") fontName:@"Futura-Medium" fontSize:20.0];
+        CCLabelTTF *htp = [CCLabelTTF labelWithString:NSLocalizedString(@"How To Play", @"How To Play menu button") fontName:@"Futura-Medium" fontSize:20.0];
         
         [lbl setPosition:ccp( startGame.contentSize.width / 2, startGame.contentSize.height / 2 )];
         [startGame addChild:lbl];

@@ -47,7 +47,7 @@
         [self addChild:duck z:10];
         
         NSString *desc = [[NSString alloc] init];
-        desc = @"The premise is simple. Tap on the ducks as they move across the screen. If they quack and fall, they're dead. If you don't kill all the ducks before the timer is up, you lose.";
+        desc = NSLocalizedString(@"HowToPlayDesc", @"The premise is simple. Tap on the ducks as they move across the screen. If they quack and fall, they're dead. If you don't kill all the ducks before the timer is up, you lose.");
         
         CCLabelTTF *lbl = [CCLabelTTF labelWithString:desc dimensions:labelSize alignment:UITextAlignmentCenter
                                              fontName:@"Helvetica" fontSize: 15];
@@ -56,7 +56,7 @@
         
         CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"red-button.png" selectedImage:@"blue-button.png" target:self selector:@selector(goBackToMenu:)];
         [goBack setScale:0.75];
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Go Back" fontName:@"Futura-Medium" fontSize:20.0];
+        CCLabelTTF *label = [CCLabelTTF labelWithString:NSLocalizedString(@"Go Back", @"Go Back menu button") fontName:@"Futura-Medium" fontSize:20.0];
         [label setPosition:ccp( goBack.contentSize.width / 2, goBack.contentSize.height / 2 )];
         [goBack addChild:label];
         
