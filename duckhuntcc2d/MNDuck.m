@@ -15,6 +15,8 @@
 
 @synthesize hasBeenShot;
 
+#pragma mark Class
+
 +(MNDuck *)newDuck
 {
     MNDuck *duck = [MNDuck spriteWithFile:@"duck.png"];
@@ -25,6 +27,8 @@
     
     return duck;
 }
+
+#pragma mark Postioning
 
 -(void)setOffscreenRight
 {
@@ -40,6 +44,8 @@
     
     [self setPosition:ccp( self.position.x, newY)];
 }
+
+#pragma mark Size
 
 -(CGFloat)width
 {
@@ -73,6 +79,8 @@
 	return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
+#pragma mark Touch
+
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     if( hasBeenShot ) return;
@@ -103,6 +111,8 @@
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[super onExit];
 }	
+
+#pragma mark Logic/Actions
 
 - (void)shoot
 {

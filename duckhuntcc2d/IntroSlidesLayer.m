@@ -11,6 +11,8 @@
 
 @implementation IntroSlidesLayer
 
+#pramga mark Class
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -25,6 +27,8 @@
 	// return the scene
 	return scene;
 }
+
+#pragma mark init/dealloc
 
 - (id)init
 {
@@ -59,6 +63,20 @@
     return self;
 }
 
+- (void)dealloc
+{
+    // _background is released automatically
+    [backgrounds release];
+    [super dealloc];
+}
+
+#pragma mark Logic
+
+- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self nextScene];
+}
+
 - (void)tick:(ccTime *)dt
 {
     if( [backgrounds count] > 0 ) {
@@ -85,18 +103,6 @@
     
     _background = sprite;
     [self addChild:_background];
-}
-
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [self nextScene];
-}
-
-- (void)dealloc
-{
-    // _background is released automatically
-    [backgrounds release];
-    [super dealloc];
 }
 
 @end

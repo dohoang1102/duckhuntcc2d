@@ -12,6 +12,8 @@
 
 @implementation MenuLayer
 
+#pragma mark Class
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -26,6 +28,8 @@
 	// return the scene
 	return scene;
 }
+
+#pragma mark init/dealloc
 
 -(id)init
 {
@@ -58,6 +62,13 @@
     return self;
 }
 
+-(void)dealloc
+{
+    [super dealloc];
+}
+
+#pragma mark Menu Events
+
 -(void)startGameTapped:(id)sender
 {
     CCScene *gameScene = [GameLayer scene];
@@ -70,11 +81,6 @@
     CCScene *howToPlay = [HowToPlayLayer scene];
     CCTransitionFade *transition = [CCTransitionFade transitionWithDuration:1 scene:howToPlay];
     [[CCDirector sharedDirector] replaceScene:transition];
-}
-
--(void)dealloc
-{
-    [super dealloc];
 }
 
 @end

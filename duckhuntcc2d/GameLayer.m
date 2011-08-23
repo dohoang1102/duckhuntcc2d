@@ -16,12 +16,14 @@
 
 #define kGAMEOVERLOST NO
 #define kGAMEOVERWON YES
-#define kDUCKSTATS @"%d dead %d alive"
 
 
 @implementation GameLayer
 
 @synthesize clockValue;
+@synthesize level;
+
+#pragma mark Class
 
 +(CCScene *) scene
 {
@@ -38,66 +40,120 @@
 	return scene;
 }
 
+#pragma mark init/dealloc
+
 - (id)init
 {
     if( self = [super init] ) {
         self.isTouchEnabled = YES;
-        level = 1;
-        [self setClockValue:30];
         
-        background = [CCSprite spriteWithFile:@"background.jpeg"];
-        [background setPosition:ccp(240, 160)];
-        [self addChild:background z:0];
-        
-        clock = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%04d", self.clockValue]
-                                   fontName:@"Helvetica" fontSize:18];
-        [clock setColor:ccc3(0,0,0)];
-        [clock setPosition:ccp(25, 310)];
-        [self addChild:clock z:10];
-        
-        conveyorBeltLayer = [[ConveyorBelt alloc] init];
-        [conveyorBeltLayer setStartingDucks:30];
-        [conveyorBeltLayer setBeltSpeed:3];
-        [conveyorBeltLayer setBeltInterval:0.5];
-        [self addChild:conveyorBeltLayer z:1];
-        [conveyorBeltLayer addObserver:self forKeyPath:@"gameOver" options:NSKeyValueChangeSetting context:nil];
-        [conveyorBeltLayer addObserver:self forKeyPath:@"deadDucks" options:NSKeyValueChangeSetting context:nil];
-        
-        duckStats = [CCLabelTTF labelWithString:
-                     [NSString stringWithFormat:@"%d dead %d alive", [conveyorBeltLayer deadDucks],
-                      ([conveyorBeltLayer startingDucks] - [conveyorBeltLayer deadDucks])] 
-                                       fontName:@"Helvetica"
-                                       fontSize:18];
-        [duckStats setPosition:ccp( 400, 310 )];
-        [duckStats setColor:ccc3(0,0,0)];
-        [self addChild:duckStats];
+        [self setBackground:@"background.jpeg"];
+        [self initLabels];
         
         [self performSelectorInBackground:@selector(loadSoundFilesInBackground) withObject:nil];
-        [self schedule:@selector(tick:) interval:1];
-        [conveyorBeltLayer start];
+        [self resetAndIncrementLevel];
     }
     
     return self;
 }
 
-- (void)resetAndIncrementLevel
+- (void)dealloc
 {
-    level++;
-    [conveyorBeltLayer resetWithLevel:level];
+    [super dealloc];
 }
 
-- (void)tick:(ccTime)dt
+#pragma mark Set Up
+
+- (void)initConveyorBeltLayerWithStartingDucks:(int)ducks beltSpeed:(float)beltSpeed beltInterval:(float)beltInterval
 {
-    self.clockValue -= 1;
-    [clock setString:[NSString stringWithFormat:@"%04d", self.clockValue]];
-    
-    if ( self.clockValue == 15 )
-        [clock setColor:ccc3(255, 140, 0)];
-    else if( self.clockValue == 10 )
-        [clock setColor:ccc3(255,0,0)];
-    else if ( self.clockValue <= 0 )
-        [self gameOver:kGAMEOVERLOST];
+    conveyorBeltLayer = [[ConveyorBelt alloc] init];
+    [conveyorBeltLayer setStartingDucks:ducks];
+    [conveyorBeltLayer setBeltSpeed:beltSpeed];
+    [conveyorBeltLayer setBeltInterval:beltInterval];
+    [self addChild:conveyorBeltLayer z:1];
+    [conveyorBeltLayer addObserver:self forKeyPath:@"gameOver" options:NSKeyValueChangeSetting context:nil];
+    [conveyorBeltLayer addObserver:self forKeyPath:@"deadDucks" options:NSKeyValueChangeSetting context:nil];
 }
+
+- (void)initLabels
+{
+    clockLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%04d", self.clockValue]
+                                    fontName:@"Helvetica" fontSize:18];
+    [clockLabel setColor:ccc3(0,0,0)];
+    [clockLabel setPosition:ccp(25, 310)];
+    [self addChild:clockLabel];
+    
+    levelLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", self.level]
+                                    fontName:@"Helvetica" fontSize:18];
+    [levelLabel setColor:ccc3(0,0,0)];
+    [levelLabel setPosition:ccp(75, 310)];
+    [self addChild:levelLabel];
+    
+    duckStatsLabel = [CCLabelTTF labelWithString:
+                      [NSString stringWithFormat:NSLocalizedString(@"%d dead %d alive", @"Duck Stats"), 0, 0]
+                                        fontName:@"Helvetica"
+                                        fontSize:18];
+    [duckStatsLabel setPosition:ccp( 400, 310 )];
+    [duckStatsLabel setColor:ccc3(0,0,0)];
+    [self addChild:duckStatsLabel];
+}
+
+-(void)setBackground:(NSString *)newBackground
+{
+    [self removeChild:background cleanup:YES];
+    [background release];
+    
+    background = [CCSprite spriteWithFile:newBackground];
+    [background setPosition:ccp(240, 160)];
+    [self addChild:background z:0];
+}
+
+# pragma mark Reset
+
+- (void)resetAndIncrementLevel
+{
+    int startDucks = 15, timer = 20; float beltSpeed = 5, beltInterval = 1;
+    
+    level++;
+    
+    if ( level == 2 ) {
+        timer = 40;
+        startDucks = 40;
+        beltSpeed = 4;
+        beltInterval = 0.75;
+    }
+    else if( level == 3 || level == 0 ) {
+        CCScene* menuScene = [MenuLayer scene];
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1 scene:menuScene]];
+        return;
+    }
+    
+    [self removeChildByTag:2 cleanup:true];
+    [self resetLabels];
+    [self initConveyorBeltLayerWithStartingDucks:startDucks beltSpeed:beltSpeed beltInterval:beltInterval];
+    [self setClockValue:timer];
+    
+    [self schedule:@selector(tick:) interval:1];
+    [conveyorBeltLayer start];
+}
+
+
+- (void)resetLabels
+{
+    [clockLabel setColor:ccc3(0,0,0)];
+    [clockLabel setString:[NSString stringWithFormat:@"%04d", self.clockValue]];
+    [levelLabel setString:[NSString stringWithFormat:@"%d", self.level]];
+    [duckStatsLabel setString:[NSString stringWithFormat:NSLocalizedString(@"%d dead %d alive", @"Duck Stats"), 0, 0]];
+}
+
+-(void)removeConveyorBeltObject
+{
+    [self removeChild:conveyorBeltLayer cleanup:YES];
+    [conveyorBeltLayer release]; //also release its children
+    conveyorBeltLayer = nil;
+}
+
+#pragma mark Game Play and Logic
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
@@ -105,8 +161,22 @@
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    CCScene* menuScene = [MenuLayer scene];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1 scene:menuScene]];
+    [self resetAndIncrementLevel];
+}
+
+- (void)tick:(ccTime)dt
+{
+    self.clockValue -= 1;
+    [clockLabel setString:[NSString stringWithFormat:@"%04d", self.clockValue]];
+    
+    if (self.clockValue > 15)
+        [clockLabel setColor:ccc3(0, 0, 0)];
+    else if ( self.clockValue == 15 )
+        [clockLabel setColor:ccc3(255, 140, 0)];
+    else if( self.clockValue == 10 )
+        [clockLabel setColor:ccc3(255,0,0)];
+    else if ( self.clockValue <= 0 )
+        [self gameOver:kGAMEOVERLOST];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath 
@@ -131,6 +201,9 @@
     // stop conveyor belt; avoid multiple messages being sent
     [conveyorBeltLayer pause];
     
+    // set level = -1 to prevent continued gameplay
+    if( !status ) level = -1;
+    
     // set up "Game Over" label + fade-in
     NSString *msg = status ? 
         NSLocalizedString(@"Game Over :) You Win!", @"Game Over - You Win Message") :
@@ -140,6 +213,7 @@
     CCLabelTTF *label = [CCLabelTTF labelWithString:msg fontName:@"Futura-Medium" fontSize:20];
     [label setPosition:ccp( winSize.width / 2, winSize.height / 2)];
     [label setOpacity:0];
+    [label setTag:2];
     [self addChild:label z:10];
     
     // fade in message; fade out ducks, ultimately remove and release
@@ -150,16 +224,13 @@
 
 -(void)updateDuckStats:(id)object withKeyPath:(NSString *)keyPath
 {
-    [duckStats setString:[NSString stringWithFormat: NSLocalizedString(@"%d dead %d alive", @"Duck Statistics Format String"),
+    [duckStatsLabel setString:[NSString stringWithFormat: NSLocalizedString(@"%d dead %d alive", @"Duck Statistics Format String"),
                          [conveyorBeltLayer deadDucks],
                           ([conveyorBeltLayer startingDucks] - [conveyorBeltLayer deadDucks])]];
 }
 
--(void)removeConveyorBeltObject
-{
-    [self removeChild:conveyorBeltLayer cleanup:YES];
-    [conveyorBeltLayer release]; //also release its children
-}
+
+#pragma mark Background
 
 -(void)loadSoundFilesInBackground
 {
@@ -170,11 +241,6 @@
     [[SimpleAudioEngine sharedEngine] preloadEffect:@"buzz.wav"];
     
     [pool release];
-}
-
-- (void)dealloc
-{
-    [super dealloc];
 }
 
 @end

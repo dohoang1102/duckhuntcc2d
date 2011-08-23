@@ -13,28 +13,34 @@
     
 }
 
+#pragma mark Class
 +(MNDuck *)newDuck;
 
+#pragma mark Positioning
 -(void)setOffscreenRight;
 -(void)setRandomY;
 
--(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
-
--(CGRect)rect;
--(CGRect)rectInPixels;
--(BOOL)containsTouchLocation:(UITouch *)touch;
--(void)onEnter;
--(void)onExit;
-
--(void)shoot;
--(void)quack;
-
+#pragma mark Size
 -(CGFloat)width;
 -(CGFloat)height;
 -(CGFloat)x;
 -(CGFloat)y;
+-(CGRect)rect;
+-(CGRect)rectInPixels;
+-(BOOL)containsTouchLocation:(UITouch *)touch;
 
+#pragma mark Touch
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event;
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
+-(void)onEnter;
+-(void)onExit;
+
+#pragma mark Logic/Action
+-(void)shoot;
+-(void)quack;
+
+#pragma mark -
+#pragma mark Properties
 @property(nonatomic) BOOL hasBeenShot;
 
 @end

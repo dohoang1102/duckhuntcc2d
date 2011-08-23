@@ -17,17 +17,27 @@
     CGSize winSize;
 }
 
-- (void)initializeDucks;
-- (void)resetWithLevel:(int)level;
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
-- (void)returnDuck:(id)sender;
-- (void)setOpacity: (GLubyte) opacity;
+#pragma mark Belt Control
 - (void)start;
 - (void)pause;
+
+#pragma mark Setup
+- (void)initializeDucks;
+
+#pragma mark Game Logic
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;
+- (void)returnDuck:(id)sender;
+
+#pragma mark Game Touch
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event;
 - (void)onEnter;
 - (void)onExit;
 
+#pragma mark Game Utilities
+- (void)setOpacity: (GLubyte) opacity;
+
+#pragma mark -
+#pragma mark Properties
 @property(nonatomic) BOOL   gameOver;
 @property(nonatomic) int    deadDucks;
 @property(nonatomic) int    startingDucks;

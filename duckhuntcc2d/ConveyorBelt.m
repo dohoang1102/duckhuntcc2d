@@ -22,6 +22,8 @@
 @synthesize beltSpeed;
 @synthesize beltInterval;
 
+#pragma mark init/dealloc
+
 - (id)init
 {
     if( self = [super init] ) {
@@ -39,6 +41,15 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [rightPond release];
+    [onBelt release];
+    [super dealloc];
+}
+
+#pragma mark Belt Control
+
 - (void)start
 {
     winSize = [[CCDirector sharedDirector] winSize];
@@ -51,6 +62,8 @@
     [self pauseSchedulerAndActions];
 }
 
+#pragma mark Set Up
+
 - (void)initializeDucks
 {
     for( int i = 0; i < startingDucks; i++ ) {
@@ -62,31 +75,7 @@
     [self setDeadDucks:0];
 }
 
-- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    // pass on every touch
-	return YES;
-}
-
-- (void)sendNextDuck:(ccTime)dt
-{
-    if( [rightPond count] > 0 ) {
-        NSUInteger randomIndex = arc4random() % [rightPond count];
-        NSUInteger randomY = (arc4random() % (int)( winSize.height ) );
-        
-        MNDuck *nextDuck = [rightPond objectAtIndex:randomIndex];
-        [onBelt addObject:nextDuck];
-        
-        [rightPond removeObject:nextDuck];
-        
-        [nextDuck runAction:
-         [CCSequence actions:
-          [CCMoveTo actionWithDuration:[self beltSpeed] position:ccp( 0 - nextDuck.width, randomY )],
-          [CCCallFuncN actionWithTarget:self selector:@selector(returnDuck:)],
-          nil]
-        ];
-    }
-}
+#pragma mark Game Logic
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
@@ -105,6 +94,26 @@
     }
 }
 
+- (void)sendNextDuck:(ccTime)dt
+{
+    if( [rightPond count] > 0 ) {
+        NSUInteger randomIndex = arc4random() % [rightPond count];
+        NSUInteger randomY = (arc4random() % (int)( winSize.height ) );
+        
+        MNDuck *nextDuck = [rightPond objectAtIndex:randomIndex];
+        [onBelt addObject:nextDuck];
+        
+        [rightPond removeObject:nextDuck];
+        
+        [nextDuck runAction:
+         [CCSequence actions:
+          [CCMoveTo actionWithDuration:[self beltSpeed] position:ccp( 0 - nextDuck.width, randomY )],
+          [CCCallFuncN actionWithTarget:self selector:@selector(returnDuck:)],
+          nil]
+         ];
+    }
+}
+
 - (void)returnDuck:(MNDuck *)sender
 {
     [sender setPosition:ccp( self.contentSize.width + (sender.width / 2), sender.y )];
@@ -112,13 +121,12 @@
     [rightPond addObject:sender];
 }
 
-- (void)resetWithLevel:(int)level
+#pragma mark Touch
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    [rightPond removeAllObjects];
-    [onBelt removeAllObjects];
-    startingDucks *= level;
-    
-    [self initializeDucks];
+    // pass on every touch
+	return YES;
 }
 
 - (void)onEnter
@@ -133,6 +141,8 @@
 	[super onExit];
 }
 
+#pragma mark Utilities
+
 // Set the opacity of all of our children that support it
 -(void) setOpacity: (GLubyte) opacity
 {
@@ -143,13 +153,6 @@
             [(id<CCRGBAProtocol>) node setOpacity: opacity];
         }
     }
-}
-
-- (void)dealloc
-{
-    [rightPond release];
-    [onBelt release];
-    [super dealloc];
 }
 
 @end

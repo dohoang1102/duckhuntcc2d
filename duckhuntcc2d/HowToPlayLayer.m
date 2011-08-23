@@ -16,6 +16,8 @@
 
 @implementation HowToPlayLayer
 
+#pragma mark Class
+
 +(CCScene *) scene
 {
 	// 'scene' is an autorelease object.
@@ -30,6 +32,8 @@
 	// return the scene
 	return scene;
 }
+
+#pragma mark init/dealloc
 
 -(id)init
 {
@@ -47,10 +51,12 @@
         [self addChild:duck z:10];
         
         NSString *desc = [[NSString alloc] init];
-        desc = NSLocalizedString(@"HowToPlayDesc", @"The premise is simple. Tap on the ducks as they move across the screen. If they quack and fall, they're dead. If you don't kill all the ducks before the timer is up, you lose.");
+        desc = NSLocalizedString(@"HowToPlayDesc",
+                                 @"The premise is simple. Tap on the ducks as they move across the screen. If they quack and fall, they're dead. If you don't kill all the ducks before the timer is up, you lose.");
         
         CCLabelTTF *lbl = [CCLabelTTF labelWithString:desc dimensions:labelSize alignment:UITextAlignmentCenter
                                              fontName:@"Helvetica" fontSize: 15];
+        [desc release];
         [lbl setPosition:ccp(50 + (winSize.width / 2), 50 + (winSize.height / 2))];
         [self addChild:lbl];
         
@@ -68,12 +74,21 @@
     return self;
 }
 
+-(void)dealloc
+{
+    [super dealloc];
+}
+
+#pragma mark Menu Events
+
 -(void)goBackToMenu:(id)sender
 {
     CCScene *menu = [MenuLayer scene];
     CCTransitionFade *transition = [CCTransitionFade transitionWithDuration:1 scene:menu];
     [[CCDirector sharedDirector] replaceScene:transition];
 }
+
+#pragma mark Background
 
 -(void)loadSoundFilesInBackground
 {

@@ -12,20 +12,35 @@
 
 @interface GameLayer : CCLayer {
     CCSprite *background;
-    CCLabelTTF *clock;
-    CCLabelTTF *duckStats;
+    CCLabelTTF *clockLabel;
+    CCLabelTTF *duckStatsLabel;
+    CCLabelTTF *levelLabel;
     ConveyorBelt *conveyorBeltLayer;
-    
-    int level;
 }
 
+#pragma mark Class
 +(CCScene *)scene;
--(void)gameOver:(BOOL)status;
--(void)resetAndIncrementLevel;
--(void)loadSoundFilesInBackground;
--(void)removeConveyorBeltObject;
--(void)updateDuckStats:(id)object withKeyPath:(NSString *)keyPath;
 
-@property int clockValue;
+#pragma mark Set Up
+-(void)initLabels;
+-(void)initConveyorBeltLayerWithStartingDucks:(int)ducks beltSpeed:(float)beltSpeed beltInterval:(float)beltInterval;
+-(void)setBackground:(NSString *)newBackground;
+
+#pragma mark Reset
+-(void)resetAndIncrementLevel;
+-(void)resetLabels;
+-(void)removeConveyorBeltObject;
+
+#pragma mark Game Play and Logic
+-(void)updateDuckStats:(id)object withKeyPath:(NSString *)keyPath;
+-(void)gameOver:(BOOL)status;
+
+#pragma mark Background
+-(void)loadSoundFilesInBackground;
+
+#pragma mark -
+#pragma mark Properties
+@property(nonatomic) int clockValue;
+@property(nonatomic) int level;
 
 @end
