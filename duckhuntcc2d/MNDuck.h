@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 @interface MNDuck : CCSprite<CCTargetedTouchDelegate> {
-    CCAction *animation;
+    
 }
 
 #pragma mark Class
@@ -48,5 +48,6 @@
 #pragma mark -
 #pragma mark Properties
 @property(nonatomic) BOOL hasBeenShot;
+@property(nonatomic, retain) CCAction *animation;
 
 @end

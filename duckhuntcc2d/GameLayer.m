@@ -46,6 +46,7 @@
 {
     if( self = [super init] ) {
         self.isTouchEnabled = YES;
+        [self setLevel:2];
         
         [self setBackground:@"background.jpeg"];
         [self initLabels];
@@ -122,7 +123,13 @@
         beltSpeed = 4;
         beltInterval = 0.75;
     }
-    else if( level == 3 || level == 0 ) {
+    else if( level == 3 ) {
+        timer = 50;
+        startDucks = 80;
+        beltSpeed = 3;
+        beltInterval = 0.5;
+    }
+    else if( level != 1 ) {
         CCScene* menuScene = [MenuLayer scene];
         [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:1 scene:menuScene]];
         return;

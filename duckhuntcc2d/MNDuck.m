@@ -14,6 +14,7 @@
 @implementation MNDuck
 
 @synthesize hasBeenShot;
+@synthesize animation;
 
 #pragma mark Class
 
@@ -32,7 +33,8 @@
 -(id)init
 {
     if(self = [super init]){
-        [self performSelectorInBackground:@selector(setupAnimation) withObject:nil];
+        [self setupAnimation];
+//        [self performSelectorInBackground:@selector(setupAnimation) withObject:nil];
     }
     return self;
 }
@@ -47,7 +49,7 @@
 
 -(void)playAnimation
 {
-    [self runAction:animation];
+    [self runAction:[self animation]];
 }
 
 -(void)stopAnimation
@@ -158,7 +160,7 @@
     }
     
     CCAnimation* _animation = [CCAnimation animationWithFrames:duckFrames delay:0.1f];    
-    animation = [[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_animation restoreOriginalFrame:NO]] retain];
+    [self setAnimation:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_animation restoreOriginalFrame:NO]]];
     
     [pool release];
 }

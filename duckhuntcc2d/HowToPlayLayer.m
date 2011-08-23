@@ -62,9 +62,12 @@
         [self addChild:lbl];
         
         CCMenuItemImage *goBack = [CCMenuItemImage itemFromNormalImage:@"red-button.png" selectedImage:@"blue-button.png" target:self selector:@selector(goBackToMenu:)];
+        [goBack setPosition:ccp( 0,-50 )];
         [goBack setScale:0.75];
+        
         CCLabelTTF *label = [CCLabelTTF labelWithString:NSLocalizedString(@"Go Back", @"Go Back menu button") fontName:@"Futura-Medium" fontSize:20.0];
         [label setPosition:ccp( goBack.contentSize.width / 2, goBack.contentSize.height / 2 )];
+        
         [goBack addChild:label];
         
         CCMenu *gameMenu = [CCMenu menuWithItems:goBack, nil];
