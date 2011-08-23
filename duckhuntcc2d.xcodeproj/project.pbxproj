@@ -137,6 +137,8 @@
 		344EA6A913FEECFC000517B4 /* ConveyorBelt.m in Sources */ = {isa = PBXBuildFile; fileRef = 344EA6A813FEECFC000517B4 /* ConveyorBelt.m */; };
 		3488DA301403DB6A0062FCE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3488DA2E1403DB6A0062FCE9 /* Localizable.strings */; };
 		3488DA3D1403E9010062FCE9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3488DA3B1403E9010062FCE9 /* Localizable.strings */; };
+		3488DA4414040DBC0062FCE9 /* ducks_default.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3488DA4214040DBC0062FCE9 /* ducks_default.plist */; };
+		3488DA4514040DBC0062FCE9 /* ducks_default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3488DA4314040DBC0062FCE9 /* ducks_default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -395,6 +397,8 @@
 		344EA6A813FEECFC000517B4 /* ConveyorBelt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConveyorBelt.m; sourceTree = "<group>"; };
 		3488DA2F1403DB6A0062FCE9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		3488DA3C1403E9010062FCE9 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = Localizable.strings; sourceTree = "<group>"; };
+		3488DA4214040DBC0062FCE9 /* ducks_default.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ducks_default.plist; sourceTree = "<group>"; };
+		3488DA4314040DBC0062FCE9 /* ducks_default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ducks_default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +474,8 @@
 		3420F41D13FD7D070061214A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3488DA4214040DBC0062FCE9 /* ducks_default.plist */,
+				3488DA4314040DBC0062FCE9 /* ducks_default.png */,
 				343C99791402EA9B000347EA /* buzz.wav */,
 				343C99771402EA2E000347EA /* bell.wav */,
 				343C99751402E787000347EA /* quack.wav */,
@@ -912,6 +918,8 @@
 				343C997A1402EA9B000347EA /* buzz.wav in Resources */,
 				3488DA301403DB6A0062FCE9 /* Localizable.strings in Resources */,
 				3488DA3D1403E9010062FCE9 /* Localizable.strings in Resources */,
+				3488DA4414040DBC0062FCE9 /* ducks_default.plist in Resources */,
+				3488DA4514040DBC0062FCE9 /* ducks_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -86,7 +86,8 @@
         [onBelt removeObject:object];
         [object removeObserver:self forKeyPath:@"hasBeenShot"];
         
-        [duckStats setString:[NSString stringWithFormat:@"%d dead %d alive", deadDucks, (startingDucks - deadDucks)]];
+        [duckStats setString:[NSString stringWithFormat:
+            NSLocalizedString(@"%d dead %d alive", @"Duck Statistics"), deadDucks, (startingDucks - deadDucks)]];
         
         if( deadDucks  == (startingDucks) ) {
             [self setGameOver:kGAMEOVERWON];
@@ -105,6 +106,7 @@
         
         [rightPond removeObject:nextDuck];
         
+        [nextDuck playAnimation];
         [nextDuck runAction:
          [CCSequence actions:
           [CCMoveTo actionWithDuration:[self beltSpeed] position:ccp( 0 - nextDuck.width, randomY )],
@@ -116,6 +118,7 @@
 
 - (void)returnDuck:(MNDuck *)sender
 {
+    [sender stopAnimation];
     [sender setPosition:ccp( self.contentSize.width + (sender.width / 2), sender.y )];
     [onBelt removeObject:sender];
     [rightPond addObject:sender];

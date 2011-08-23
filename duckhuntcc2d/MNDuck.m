@@ -20,12 +20,39 @@
 +(MNDuck *)newDuck
 {
     MNDuck *duck = [MNDuck spriteWithFile:@"duck.png"];
-    [duck setScale:0.5];
     [duck setRandomY];
     [duck setOffscreenRight];
     [duck setHasBeenShot:false];
     
     return duck;
+}
+
+#pragma mark init/dealloc
+
+-(id)init
+{
+    if(self = [super init]){
+        [self performSelectorInBackground:@selector(setupAnimation) withObject:nil];
+    }
+    return self;
+}
+
+-(void)dealloc
+{
+    [animation release];
+    animation = nil;
+    
+    [super dealloc];
+}
+
+-(void)playAnimation
+{
+    [self runAction:animation];
+}
+
+-(void)stopAnimation
+{
+    [self stopAction:animation];
 }
 
 #pragma mark Postioning
@@ -69,13 +96,13 @@
 
 - (CGRect)rectInPixels
 {
-	CGSize s = [texture_ contentSizeInPixels];
+	CGSize s = [self contentSizeInPixels];
 	return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
 - (CGRect)rect
 {
-	CGSize s = [texture_ contentSize];
+	CGSize s = [self contentSize];
 	return CGRectMake(-s.width / 2, -s.height / 2, s.width, s.height);
 }
 
@@ -111,6 +138,30 @@
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[super onExit];
 }	
+
+#pragma mark Background
+
+-(void)setupAnimation
+{
+    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ducks_default.plist"];
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"ducks_default.png"];
+    [self addChild:spriteSheet];
+    
+    NSMutableArray *duckFrames = [NSMutableArray array];
+    for(int i = 0; i <= 8; i++) {
+        [duckFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"duck%d.png", i]]];
+    }
+    for(int i = 7; i >= 0; i--) {
+        [duckFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"duck%d.png", i]]];
+    }
+    
+    CCAnimation* _animation = [CCAnimation animationWithFrames:duckFrames delay:0.1f];    
+    animation = [[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_animation restoreOriginalFrame:NO]] retain];
+    
+    [pool release];
+}
 
 #pragma mark Logic/Actions
 

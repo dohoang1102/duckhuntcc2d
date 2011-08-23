@@ -83,10 +83,10 @@
     [clockLabel setPosition:ccp(25, 310)];
     [self addChild:clockLabel];
     
-    levelLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"%d", self.level]
+    levelLabel = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level %d", self.level]
                                     fontName:@"Helvetica" fontSize:18];
     [levelLabel setColor:ccc3(0,0,0)];
-    [levelLabel setPosition:ccp(75, 310)];
+    [levelLabel setPosition:ccp(240, 310)];
     [self addChild:levelLabel];
     
     duckStatsLabel = [CCLabelTTF labelWithString:
@@ -142,7 +142,7 @@
 {
     [clockLabel setColor:ccc3(0,0,0)];
     [clockLabel setString:[NSString stringWithFormat:@"%04d", self.clockValue]];
-    [levelLabel setString:[NSString stringWithFormat:@"%d", self.level]];
+    [levelLabel setString:[NSString stringWithFormat:@"Level %d", self.level]];
     [duckStatsLabel setString:[NSString stringWithFormat:NSLocalizedString(@"%d dead %d alive", @"Duck Stats"), 0, 0]];
 }
 

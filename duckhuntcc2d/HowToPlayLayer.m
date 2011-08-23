@@ -48,6 +48,7 @@
         
         MNDuck *duck = [MNDuck newDuck];
         [duck setPosition:ccp(70, 275)];
+        [duck playAnimation];
         [self addChild:duck z:10];
         
         NSString *desc = [[NSString alloc] init];

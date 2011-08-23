@@ -10,11 +10,14 @@
 #import "cocos2d.h"
 
 @interface MNDuck : CCSprite<CCTargetedTouchDelegate> {
-    
+    CCAction *animation;
 }
 
 #pragma mark Class
 +(MNDuck *)newDuck;
+
+-(void)playAnimation;
+-(void)stopAnimation;
 
 #pragma mark Positioning
 -(void)setOffscreenRight;
@@ -38,6 +41,9 @@
 #pragma mark Logic/Action
 -(void)shoot;
 -(void)quack;
+
+#pragma mark Background
+-(void)setupAnimation;
 
 #pragma mark -
 #pragma mark Properties
