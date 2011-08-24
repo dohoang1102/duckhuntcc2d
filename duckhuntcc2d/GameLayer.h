@@ -33,7 +33,7 @@
 
 #pragma mark Game Play and Logic
 -(void)updateDuckStats:(id)object withKeyPath:(NSString *)keyPath;
--(void)gameOver:(BOOL)status;
+-(void)gameOver:(NSNumber *)istatus;
 
 #pragma mark Background
 -(void)loadSoundFilesInBackground;

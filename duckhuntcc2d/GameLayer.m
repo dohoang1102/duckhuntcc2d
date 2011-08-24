@@ -46,7 +46,7 @@
 {
     if( self = [super init] ) {
         self.isTouchEnabled = YES;
-        [self setLevel:2];
+        [self setLevel:0];
         
         [self setBackground:@"background.jpeg"];
         [self initLabels];
@@ -71,9 +71,8 @@
     [conveyorBeltLayer setStartingDucks:ducks];
     [conveyorBeltLayer setBeltSpeed:beltSpeed];
     [conveyorBeltLayer setBeltInterval:beltInterval];
+    [conveyorBeltLayer registerObserver:self];
     [self addChild:conveyorBeltLayer z:1];
-    [conveyorBeltLayer addObserver:self forKeyPath:@"gameOver" options:NSKeyValueChangeSetting context:nil];
-    [conveyorBeltLayer addObserver:self forKeyPath:@"deadDucks" options:NSKeyValueChangeSetting context:nil];
 }
 
 - (void)initLabels
@@ -113,7 +112,7 @@
 
 - (void)resetAndIncrementLevel
 {
-    int startDucks = 15, timer = 20; float beltSpeed = 5, beltInterval = 1;
+    int startDucks = 1, timer = 05; float beltSpeed = 5, beltInterval = 1;
     
     level++;
     
@@ -156,6 +155,7 @@
 -(void)removeConveyorBeltObject
 {
     [self removeChild:conveyorBeltLayer cleanup:YES];
+    [conveyorBeltLayer unregisterObserver:self];
     [conveyorBeltLayer release]; //also release its children
     conveyorBeltLayer = nil;
 }
@@ -191,15 +191,16 @@
                        context:(void *)context
 {
     if( [keyPath isEqualToString:@"gameOver"] ) {
-        [self gameOver:(BOOL)[object valueForKey:keyPath]];
+        [self gameOver:[object valueForKey:keyPath]];
     }
     else if( [keyPath isEqualToString:@"deadDucks"] ) {
         [self updateDuckStats:object withKeyPath:keyPath];
     }
 }
 
--(void)gameOver:(BOOL)status
+-(void)gameOver:(NSNumber *)istatus
 {
+    bool status = [istatus boolValue];
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     
     // stop clock

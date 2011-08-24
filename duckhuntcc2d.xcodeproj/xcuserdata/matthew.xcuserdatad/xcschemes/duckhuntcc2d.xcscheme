@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3420F40713FD7D070061214A"
-               BuildableName = "duckhuntcc2d.app"
+               BuildableName = "DuckHuntcc2d.app"
                BlueprintName = "duckhuntcc2d"
                ReferencedContainer = "container:duckhuntcc2d.xcodeproj">
             </BuildableReference>
@@ -39,7 +39,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3420F40713FD7D070061214A"
-            BuildableName = "duckhuntcc2d.app"
+            BuildableName = "DuckHuntcc2d.app"
             BlueprintName = "duckhuntcc2d"
             ReferencedContainer = "container:duckhuntcc2d.xcodeproj">
          </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3420F40713FD7D070061214A"
-            BuildableName = "duckhuntcc2d.app"
+            BuildableName = "DuckHuntcc2d.app"
             BlueprintName = "duckhuntcc2d"
             ReferencedContainer = "container:duckhuntcc2d.xcodeproj">
          </BuildableReference>
@@ -73,7 +73,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Distribution"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

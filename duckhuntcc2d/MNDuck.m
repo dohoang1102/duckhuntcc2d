@@ -15,12 +15,13 @@
 
 @synthesize hasBeenShot;
 @synthesize animation;
+@synthesize removeObservers;
 
 #pragma mark Class
 
 +(MNDuck *)newDuck
 {
-    MNDuck *duck = [MNDuck spriteWithFile:@"duck.png"];
+    MNDuck *duck = [[MNDuck spriteWithFile:@"duck.png"] retain];
     [duck setRandomY];
     [duck setOffscreenRight];
     [duck setHasBeenShot:false];
@@ -33,8 +34,7 @@
 -(id)init
 {
     if(self = [super init]){
-        [self setupAnimation];
-//        [self performSelectorInBackground:@selector(setupAnimation) withObject:nil];
+
     }
     return self;
 }
@@ -44,12 +44,28 @@
     [animation release];
     animation = nil;
     
+    [self setRemoveObservers:true];
+    
     [super dealloc];
+}
+
+-(void)registerObserver:(id)object
+{
+    [self addObserver:object forKeyPath:@"hasBeenShot" options:NSKeyValueChangeSetting context:nil];
+    [self addObserver:object forKeyPath:@"removeObserver" options:NSKeyValueChangeSetting context:nil];
+}
+
+-(void)unregisterObserver:(id)object
+{
+    [self removeObserver:object forKeyPath:@"hasBeenShot"];
+    [self removeObserver:object forKeyPath:@"removeObserver"];
 }
 
 -(void)playAnimation
 {
-    [self runAction:[self animation]];
+    if ( [self animation] != nil ) {
+        [self runAction:[self animation]];
+    }
 }
 
 -(void)stopAnimation
@@ -140,30 +156,6 @@
 	[[CCTouchDispatcher sharedDispatcher] removeDelegate:self];
 	[super onExit];
 }	
-
-#pragma mark Background
-
--(void)setupAnimation
-{
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ducks_default.plist"];
-    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"ducks_default.png"];
-    [self addChild:spriteSheet];
-    
-    NSMutableArray *duckFrames = [NSMutableArray array];
-    for(int i = 0; i <= 8; i++) {
-        [duckFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"duck%d.png", i]]];
-    }
-    for(int i = 7; i >= 0; i--) {
-        [duckFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"duck%d.png", i]]];
-    }
-    
-    CCAnimation* _animation = [CCAnimation animationWithFrames:duckFrames delay:0.1f];    
-    [self setAnimation:[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_animation restoreOriginalFrame:NO]]];
-    
-    [pool release];
-}
 
 #pragma mark Logic/Actions
 

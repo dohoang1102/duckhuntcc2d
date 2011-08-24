@@ -29,6 +29,8 @@
     if( self = [super init] ) {
         
         self.isTouchEnabled = YES;
+        
+        [self setupDuckAnimation];
         [self setGameOver:NO];
         
         rightPond = [[NSMutableArray array] retain];
@@ -43,9 +45,43 @@
 
 - (void)dealloc
 {
+    [duckAnimation release];
     [rightPond release];
     [onBelt release];
+    
     [super dealloc];
+}
+
+- (void)setupDuckAnimation
+{
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"ducks_default.plist"];
+    CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:@"ducks_default.png"];
+    [self addChild:spriteSheet];
+    
+    NSMutableArray *duckFrames = [NSMutableArray array];
+    for(int i = 0; i <= 8; i++) {
+        [duckFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"duck%d.png", i]]];
+    }
+    for(int i = 7; i >= 0; i--) {
+        [duckFrames addObject:[[CCSpriteFrameCache sharedSpriteFrameCache] spriteFrameByName:[NSString stringWithFormat:@"duck%d.png", i]]];
+    }
+    
+    CCAnimation* _animation = [CCAnimation animationWithFrames:duckFrames delay:0.1f];    
+    duckAnimation = [[CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation:_animation restoreOriginalFrame:NO]] retain];
+}
+
+-(void)registerObserver:(id)object
+{
+    [self addObserver:object forKeyPath:@"gameOver" options:NSKeyValueChangeSetting context:nil];
+    [self addObserver:object forKeyPath:@"deadDucks" options:NSKeyValueChangeSetting context:nil];
+    [self addObserver:object forKeyPath:@"removeObserver" options:NSKeyValueChangeSetting context:nil];
+}
+
+-(void)unregisterObserver:(id)object
+{
+    [self removeObserver:object forKeyPath:@"gameOver"];
+    [self removeObserver:object forKeyPath:@"deadDucks"];
+    [self removeObserver:object forKeyPath:@"removeObserver"];
 }
 
 #pragma mark Belt Control
@@ -69,7 +105,8 @@
     for( int i = 0; i < startingDucks; i++ ) {
         MNDuck *duck = [MNDuck newDuck];
         [rightPond addObject:duck];
-        [duck addObserver:self forKeyPath:@"hasBeenShot" options:NSKeyValueChangeSetting context:nil];
+        [duck registerObserver:self];
+        [duck setAnimation:[duckAnimation copy]];
         [self addChild:duck];
     }
     [self setDeadDucks:0];
@@ -84,7 +121,7 @@
         
         // get rid of duck
         [onBelt removeObject:object];
-        [object removeObserver:self forKeyPath:@"hasBeenShot"];
+        [object unregisterObserver:self];
         
         [duckStats setString:[NSString stringWithFormat:
             NSLocalizedString(@"%d dead %d alive", @"Duck Statistics"), deadDucks, (startingDucks - deadDucks)]];
@@ -92,6 +129,9 @@
         if( deadDucks  == (startingDucks) ) {
             [self setGameOver:kGAMEOVERWON];
         }
+    }
+    if ( [keyPath isEqualToString:@"removeObservers"] ) {
+        [object unregisterObserver:self];
     }
 }
 
@@ -106,13 +146,13 @@
         
         [rightPond removeObject:nextDuck];
         
-        [nextDuck playAnimation];
         [nextDuck runAction:
          [CCSequence actions:
           [CCMoveTo actionWithDuration:[self beltSpeed] position:ccp( 0 - nextDuck.width, randomY )],
           [CCCallFuncN actionWithTarget:self selector:@selector(returnDuck:)],
           nil]
          ];
+        [nextDuck playAnimation];
     }
 }
 

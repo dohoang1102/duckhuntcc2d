@@ -15,7 +15,13 @@
     NSMutableArray *rightPond;
     CCLabelTTF *duckStats;
     CGSize winSize;
+    
+    CCAction *duckAnimation;
 }
+
+-(void)registerObserver:(id)object;
+-(void)unregisterObserver:(id)object;
+-(void)setupDuckAnimation;
 
 #pragma mark Belt Control
 - (void)start;

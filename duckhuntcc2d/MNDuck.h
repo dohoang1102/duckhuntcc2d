@@ -19,6 +19,9 @@
 -(void)playAnimation;
 -(void)stopAnimation;
 
+-(void)registerObserver:(id)object;
+-(void)unregisterObserver:(id)object;
+
 #pragma mark Positioning
 -(void)setOffscreenRight;
 -(void)setRandomY;
@@ -42,12 +45,10 @@
 -(void)shoot;
 -(void)quack;
 
-#pragma mark Background
--(void)setupAnimation;
-
 #pragma mark -
 #pragma mark Properties
 @property(nonatomic) BOOL hasBeenShot;
 @property(nonatomic, retain) CCAction *animation;
+@property(nonatomic) BOOL removeObservers;
 
 @end

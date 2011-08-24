@@ -142,7 +142,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3420F40813FD7D070061214A /* duckhuntcc2d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = duckhuntcc2d.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3420F40813FD7D070061214A /* DuckHuntcc2d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DuckHuntcc2d.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3420F40C13FD7D070061214A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3420F40E13FD7D070061214A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		3420F41013FD7D070061214A /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -432,7 +432,7 @@
 		3420F40913FD7D070061214A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3420F40813FD7D070061214A /* duckhuntcc2d.app */,
+				3420F40813FD7D070061214A /* DuckHuntcc2d.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -455,10 +455,10 @@
 		3420F41C13FD7D070061214A /* duckhuntcc2d */ = {
 			isa = PBXGroup;
 			children = (
+				344EA6A213FEDDBA000517B4 /* Scenes */,
 				3488DA3A1403E9010062FCE9 /* fr.lproj */,
 				3488DA2D1403DA9C0062FCE9 /* en.lproj */,
 				344EA6A313FEDDD3000517B4 /* Objects */,
-				344EA6A213FEDDBA000517B4 /* Scenes */,
 				3420F56E13FD7D090061214A /* AppDelegate.h */,
 				3420F56F13FD7D090061214A /* AppDelegate.m */,
 				3420F57113FD7D090061214A /* RootViewController.h */,
@@ -868,7 +868,7 @@
 			);
 			name = duckhuntcc2d;
 			productName = duckhuntcc2d;
-			productReference = 3420F40813FD7D070061214A /* duckhuntcc2d.app */;
+			productReference = 3420F40813FD7D070061214A /* DuckHuntcc2d.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1106,7 +1106,7 @@
 				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DuckHuntcc2d;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1122,11 +1122,47 @@
 				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DuckHuntcc2d;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
+		};
+		34B0D7CB140543F800493C41 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Distribution;
+		};
+		34B0D7CC140543F800493C41 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = duckhuntcc2d/Prefix.pch;
+				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
+				INFOPLIST_FILE = duckhuntcc2d/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lz";
+				PRODUCT_NAME = DuckHuntcc2d;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1136,6 +1172,7 @@
 			buildConfigurations = (
 				3420F57813FD7D090061214A /* Debug */,
 				3420F57913FD7D090061214A /* Release */,
+				34B0D7CB140543F800493C41 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1145,6 +1182,7 @@
 			buildConfigurations = (
 				3420F57B13FD7D090061214A /* Debug */,
 				3420F57C13FD7D090061214A /* Release */,
+				34B0D7CC140543F800493C41 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
